@@ -8,54 +8,119 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('HomeCtrl', function($scope, $timeout){
-	console.log('in the controller');
-	$scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4 };
-	    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4 };
-	    $scope.options = {scrollwheel: false};
-	    $scope.coordsUpdates = 0;
-	    $scope.dynamicMoveCtr = 0;
-	    $scope.marker = {
-	      id: 0,
-	      coords: {
-	        latitude: 40.1451,
-	        longitude: -99.6680
-	      },
-	      options: { draggable: true },
-	      events: {
-	        dragend: function (marker, eventName, args) {
-	          $log.log('marker dragend');
-	          var lat = marker.getPosition().lat();
-	          var lon = marker.getPosition().lng();
-	          $log.log(lat);
-	          $log.log(lon);
+app.controller('HomeCtrl', function($scope, $timeout, $log){
+	
+	var newyork = {latitude: 40.69847032728747, longitude:-73.9514422416687};
+	var userLocation;
 
-	          $scope.marker.options = {
-	            draggable: true,
-	            labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
-	            labelAnchor: "100 0",
-	            labelClass: "marker-labels"
-	          };
-	        }
-	      }
-	    };
-	    $scope.$watchCollection("marker.coords", function (newVal, oldVal) {
-	      if (_.isEqual(newVal, oldVal))
-	        return;
-	      $scope.coordsUpdates++;
-	    });
-	    $timeout(function () {
-	      $scope.marker.coords = {
-	        latitude: 42.1451,
-	        longitude: -100.6680
-	      };
-	      $scope.dynamicMoveCtr++;
-	      $timeout(function () {
-	        $scope.marker.coords = {
-	          latitude: 43.1451,
-	          longitude: -102.6680
-	        };
-	        $scope.dynamicMoveCtr++;
-	      }, 2000);
-	    }, 1000);
+	$scope.initialize = function(){
+		if(navigator.geolocation) {
+		    navigator.geolocation.getCurrentPosition(function(position) {
+		      userLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+		    console.log(userLocation);
+		    $scope.map = {center: userLocation, zoom:17};
+		    $scope.options = {scrollwheel: false};
+		    $scope.coordsUpdates=0;
+		    $scope.dynamicMoveCtr = 0;
+		    $scope.marker = {
+		    	id: 0,
+		    	coords: userLocation,
+		    	options: {draggable: false},
+		    	events: {
+		    		dragend: function(marker, eventName, args){
+		    			$log.log('marker dragend');
+		    			var lat = marker.getPosition().lat();
+		    			var ln = marker.getPosition.lng();
+		    			$log.log(lat);
+		    			$log.log(ln);
+
+		    			$scope.marker.options = {
+				            draggable: false,
+				            labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+				            labelAnchor: "100 0",
+				            labelClass: "marker-labels"
+				          };
+		    		}
+		    	}
+		    };
+
+			$scope.$watchCollection("marker.coords", function (newVal, oldVal) {
+				      if (_.isEqual(newVal, oldVal))
+				        return;
+				      $scope.coordsUpdates++;
+				    });
+				    $timeout(function () {
+				      $scope.marker.coords = 
+				        userLocation
+				      ;
+				      $scope.dynamicMoveCtr++;
+				      $timeout(function () {
+				        $scope.marker.coords = 
+				          userLocation
+				        ;
+				        $scope.dynamicMoveCtr++;
+				      }, 2000);
+				    }, 1000);
+
+		    });
+			}
+
+
+		  
+		  // Browser doesn't support Geolocation
+		 else {
+		    userLocation = newyork; 
+		  }
+
+
+	};
+
+	$scope.initialize();
+
+// 	$scope.map = {center: userLocation, zoom: 17 };
+// 	    console.log(userLocation);
+// 	    // $scope.map = {center: {latitude: 40.704607, longitude: -74.009453 }, zoom: 17 };
+// 	    $scope.options = {scrollwheel: false};
+// 	    $scope.coordsUpdates = 0;
+// 	    $scope.dynamicMoveCtr = 0;
+// 	    $scope.marker = {
+// 	      id: 0, //IP address
+// 	      coords: 
+// 	        userLocation
+// 	      ,
+// 	      options: { draggable: false },
+// 	      events: {
+// 	        dragend: function (marker, eventName, args) {
+// 	          $log.log('marker dragend');
+// 	          var lat = marker.getPosition().lat();
+// 	          var lon = marker.getPosition().lng();
+// 	          $log.log(lat);
+// 	          $log.log(lon);
+
+// 	          $scope.marker.options = {
+// 	            draggable: false,
+// 	            labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+// 	            labelAnchor: "100 0",
+// 	            labelClass: "marker-labels"
+// 	          };
+// 	        }
+// 	      }
+// 	    };
+// 	    $scope.$watchCollection("marker.coords", function (newVal, oldVal) {
+// 	      if (_.isEqual(newVal, oldVal))
+// 	        return;
+// 	      $scope.coordsUpdates++;
+// 	    });
+// 	    $timeout(function () {
+// 	      $scope.marker.coords = {
+// 	        userLocation
+// 	      };
+// 	      $scope.dynamicMoveCtr++;
+// 	      $timeout(function () {
+// 	        $scope.marker.coords = {
+// 	          userLocation
+// 	        };
+// 	        $scope.dynamicMoveCtr++;
+// 	      }, 2000);
+// 	    }, 1000);
 });

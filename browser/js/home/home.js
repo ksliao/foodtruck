@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('HomeCtrl', function($scope){
+app.controller('HomeCtrl', function($scope, $timeout){
 	console.log('in the controller');
 	$scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4 };
 	    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4 };

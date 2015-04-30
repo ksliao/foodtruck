@@ -1,8 +1,8 @@
 'use strict';
 var app = angular.module('FullstackGeneratedApp', [
     'ui.router', 
-    'uiGmapgoogle-maps'
-    'fsaPreBuilt',
+    'uiGmapgoogle-maps',
+    'fsaPreBuilt'
     ]);
 
 app.config(function ($urlRouterProvider, $locationProvider) {

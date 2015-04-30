@@ -40,7 +40,7 @@ gulp.task('buildJS', function () {
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat('main.js'))
-        .pipe(babel())
+        // .pipe(babel())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./public'));
 });

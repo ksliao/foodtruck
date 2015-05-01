@@ -2,6 +2,7 @@
 var app = angular.module('FullstackGeneratedApp', [
     'ui.router', 
     'uiGmapgoogle-maps',
+    'ui.map',
     'fsaPreBuilt'
     ]);
 

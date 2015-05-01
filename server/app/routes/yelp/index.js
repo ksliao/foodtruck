@@ -21,29 +21,14 @@ var yelp = require('yelp').createClient({
 
 
 
-router.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname, '../index.html'));
-});
-
-
-// someAsyncOperation
-
-// new Promise(function (resolve, reject) {
-// 	someAsyncOperation(function (err, data) {
-// 		if (err) reject(err);
-// 		else resolve(data);
-// 	});
-// });
-
-
-router.get('/:food_truck', function(req, res, next) {
-
+router.get('/', function(req, res, next) {
+	console.log('hey im in the route');
 	var foodTrucks = [];
 	var reqArr = [];
 
-	for(var i = 0; i <= 1; i ++){
+	for(var i = 0; i <= 20; i ++){
 		var thisPromise = new Promise(function(resolve, reject){
-			yelp.search({term: "food",limit: 1, offset: 10, location: "nyc" }, function(error, data) {
+			yelp.search({term: "food", offset: 20 * i, location: "nyc" }, function(error, data) {
 				if(error) reject(error);
 				else resolve(data);
 			});
@@ -55,7 +40,7 @@ router.get('/:food_truck', function(req, res, next) {
 	.then(function(data){
 		data.map(function(e){
 			return e.businesses.forEach(function(e){
-				foodTrucks.push(e.location);
+				foodTrucks.push(e.location.coordinate);
 				console.log(e);
 			});
 		});

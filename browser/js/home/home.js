@@ -17,7 +17,7 @@ app.controller('HomeCtrl', function($scope, $timeout, $log){
 		if(navigator.geolocation) {
 		    navigator.geolocation.getCurrentPosition(function(position) {
 		      userLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-		    console.log(userLocation);
+		    	console.log(userLocation);
 		    $scope.map = {center: userLocation, zoom:17};
 		    $scope.options = {scrollwheel: false};
 		    $scope.coordsUpdates=0;

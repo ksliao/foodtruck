@@ -15,23 +15,19 @@ app.config(function ($stateProvider) {
 
 app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 	$scope.trucks = trucks;
+	console.log($scope.trucks[0]);
 	$scope.truckMarkers = [];
 	$scope.loading = true;
 	$scope.currentMarker = null;
 
-	$scope.windowOptions = {
+	var windowOptions = {
 	     show: false
 	 }
 	    
-  $scope.onClick = function(marker){
-  		$scope.currentMarker = marker;
-      $scope.windowOptions.show = !$scope.windowOptions.show;
-      console.log('window!');
-  };
 
-  $scope.closeClick= function(){
-      $scope.windowOptions.show = false;
-  };
+  // $scope.closeClick= function(){
+  //     $scope.windowOptions.show = false;
+  // };
 
 
 	var newyork = {latitude: 40.69847032728747, longitude:-73.9514422416687};
@@ -43,13 +39,14 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 		});
 	};
 
+
 	$scope.initialize = function(){
 		
 		if(navigator.geolocation) {
 		    navigator.geolocation.getCurrentPosition(function(position) {
 		    $scope.loading = false;
 		     userLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-		    $scope.map = {center: userLocation, zoom:17};
+		    $scope.map = {center: newyork, zoom:17};
 		    $scope.options = {scrollwheel: false};
 		    $scope.coordsUpdates=0;
 		    $scope.dynamicMoveCtr = 0;

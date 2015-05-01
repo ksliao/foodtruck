@@ -6,12 +6,19 @@ app.factory('MapFactory', function($http){
 				return response.data;
 			});
 		},
-		makeMarker: function(coordinates, id, clickFunc){
+		makeMarker: function(truck, id){
 			var marker= {
 				id: id,
-				coords: coordinates,
+				coords: truck.coordinates,
 				options: {draggable: false},
-				labelContent: coordinates
+				show:false,
+				title: truck.name,
+				rating: truck.rating,
+				review: truck.review,
+				cuisine: truck.cuisine
+			}
+			marker.onClick = function(){
+				marker.show = !marker.show;
 			}
 			return marker;
 		}

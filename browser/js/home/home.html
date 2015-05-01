@@ -4,18 +4,17 @@
         <ui-gmap-marker coords="marker.coords" options="marker.options" idkey="marker.id">
         </ui-gmap-marker>
 
-    <div ng-repeat='marker in truckMarkers'>
-        <ui-gmap-marker coords= "marker.coords" options='marker.options' idkey='marker.id' click='onClick(marker)'>
-        </ui-gmap-marker>
-        
+    <div ng-repeat='truck in truckMarkers'>
+        <ui-gmap-marker coords= "truck.coords" options='truck.options' idkey='truck.id' click='onClick(truck)'models="truckMarkers">
+        <ui-gmap-window model='truck' coords="truck.coords" show="windowOptions.show" closeClick="closeClick()" ><div>
+        {{truck.title}}</br>
+        <img ng-src='{{truck.rating}}'></img>
+        {{truck.cuisine}}
+    </div></ui-gmap-window>    
+        </ui-gmap-marker> 
     </div>
-        <ui-gmap-window coords="currentMarker.coords" show="windowOptions.show" closeClick="closeClick()"><div>{{currentMarker.id}}</div></ui-gmap-window>
+
 
     </ui-gmap-google-map>
-    <div ng-cloak>
-        <ul>
-            <li>coords update ctr: {{coordsUpdates}}</li>
-            <li>dynamic move ctr: {{dynamicMoveCtr}}</li>
-        </ul>
-    </div>
+    
 </div>

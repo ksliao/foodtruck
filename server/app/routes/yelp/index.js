@@ -26,9 +26,9 @@ router.get('/', function(req, res, next) {
 	var foodTrucks = [];
 	var reqArr = [];
 
-	for(var i = 0; i <= 20; i ++){
+	for(var i = 0; i <= 7; i ++){
 		var thisPromise = new Promise(function(resolve, reject){
-			yelp.search({term: "food", offset: 20 * i, location: "nyc" }, function(error, data) {
+			yelp.search({term: "food", category_filter:"foodtrucks", offset: 20 * i, location: "nyc" }, function(error, data) {
 				if(error) reject(error);
 				else resolve(data);
 			});
@@ -40,7 +40,14 @@ router.get('/', function(req, res, next) {
 	.then(function(data){
 		data.map(function(e){
 			return e.businesses.forEach(function(e){
-				foodTrucks.push(e.location.coordinate);
+				foodTrucks.push(
+					{coordinates: e.location.coordinate,
+					 name: e.name, 
+					 rating: e.rating_img_url,
+					 review: e.snippet_text,
+					 cuisine: e.categories[0][1]
+					}
+				);
 				console.log(e);
 			});
 		});

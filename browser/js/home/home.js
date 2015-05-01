@@ -10,13 +10,16 @@ app.config(function ($stateProvider) {
 
 app.controller('HomeCtrl', function($scope, $timeout, $log){
 	
+	$scope.loading = true;
 	var newyork = {latitude: 40.69847032728747, longitude:-73.9514422416687};
 	var userLocation;
 
 	$scope.initialize = function(){
+		
 		if(navigator.geolocation) {
 		    navigator.geolocation.getCurrentPosition(function(position) {
-		      userLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+		    $scope.loading = false;
+		     userLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
 		    	console.log(userLocation);
 		    $scope.map = {center: userLocation, zoom:17};
 		    $scope.options = {scrollwheel: false};
@@ -50,29 +53,22 @@ app.controller('HomeCtrl', function($scope, $timeout, $log){
 				      $scope.coordsUpdates++;
 				    });
 				    $timeout(function () {
-				      $scope.marker.coords = 
-				        userLocation
-				      ;
+				      $scope.marker.coords = userLocation;
+				      
 				      $scope.dynamicMoveCtr++;
 				      $timeout(function () {
-				        $scope.marker.coords = 
-				          userLocation
-				        ;
+				        $scope.marker.coords = userLocation;
+				        
 				        $scope.dynamicMoveCtr++;
 				      }, 2000);
 				    }, 1000);
-
 		    });
 			}
-
-
-		  
 		  // Browser doesn't support Geolocation
 		 else {
+		 	$scope.loading = false;
 		    userLocation = newyork; 
 		  }
-
-
 	};
 
 	$scope.initialize();

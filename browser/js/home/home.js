@@ -13,21 +13,20 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('HomeCtrl', function($scope, $rootScope, $timeout, $log, trucks, MapFactory){
+
+app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory, GeoFactory, uiGmapGoogleMapApi){
+
 	$scope.trucks = trucks;
 	$scope.truckMarkers = [];
 	$scope.loading = true;
 	$scope.currentMarker = null;
 	$scope.cuisines = [];
 
-
-
-
 	var windowOptions = {
 	     show: false
 	 }
 	    
-	 $scope.nycAll = function(){
+	$scope.nycAll = function(){
 	 	MapFactory.getTrucks()
 	 	.then(function(trucks){
 	 		$scope.trucks = trucks;
@@ -38,10 +37,8 @@ app.controller('HomeCtrl', function($scope, $rootScope, $timeout, $log, trucks, 
 
 	  $rootScope.$on('showAllTrucks', $scope.nycAll);
 
+
 	var newyork = {latitude: 40.69847032728747, longitude:-73.9514422416687};
-
-
-	var userLocation;
 
 	$scope.renderTrucks = function(truckArr){
 		truckArr.forEach(function(truck, index){
@@ -50,48 +47,25 @@ app.controller('HomeCtrl', function($scope, $rootScope, $timeout, $log, trucks, 
 		});
 	};
 
+	GeoFactory.getGeo().then(function (){ 
+          if (GeoFactory.latitude && GeoFactory.longitude){
+            uiGmapGoogleMapApi.then(function (maps){
+            var initialLocation = {latitude: GeoFactory.latitude, longitude: GeoFactory.longitude};
+            var userLocation = {latitude: GeoFactory.latitude, longitude: GeoFactory.longitude};
+              //$scope.maps = maps;
+              $scope.map = { 
+                center: initialLocation, 
+                zoom: 17,
+              };
+              $scope.marker = {id: 0, coords: userLocation, options: {draggable: false}};
+            })
+          }
+        });
 
-	$scope.initialize = function(){
-		
-		if(navigator.geolocation) {
-		    navigator.geolocation.getCurrentPosition(function(position) {
-		    $scope.loading = false;
-		     userLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-		    $scope.map = {center: newyork, zoom:13};
-		    $scope.options = {scrollwheel: false};
-		    $scope.coordsUpdates=0;
-		    $scope.dynamicMoveCtr = 0;
-		    $scope.marker = {
-		    	id: 0,
-		    	coords: userLocation,
-		    	options: {draggable: false}
-		    };
 
-			$scope.$watchCollection("marker.coords", function (newVal, oldVal) {
-				      if (_.isEqual(newVal, oldVal))
-				        return;
-				      $scope.coordsUpdates++;
-				    });
-				    $timeout(function () {
-				      $scope.marker.coords = userLocation;
-				      
-				      $scope.dynamicMoveCtr++;
-				      $timeout(function () {
-				        $scope.marker.coords = userLocation;
-				        
-				        $scope.dynamicMoveCtr++;
-				      }, 2000);
-				    }, 1000);
-		    });
-			}
-		  // Browser doesn't support Geolocation
-		 else {
-		 	$scope.loading = false;
-		    userLocation = newyork; 
-		  }
-	};
-
-	$scope.initialize();
 	$scope.renderTrucks($scope.trucks);
+
+	// $scope.mc = new MarkerClusterer($scope.map, $scope.truckMarkers, {gridSize: 50, maxZoom: 10});
+	// console.log($scope.mc);
  
 });

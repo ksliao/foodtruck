@@ -40,14 +40,18 @@ router.get('/', function(req, res, next) {
 	.then(function(data){
 		data.map(function(e){
 			return e.businesses.forEach(function(e){
-				foodTrucks.push(
-					{coordinates: e.location.coordinate,
+				
+				var truckObj = {
+					coordinates: e.location.coordinate,
 					 name: e.name, 
 					 rating: e.rating_img_url,
 					 review: e.snippet_text,
-					 cuisine: e.categories[0][1]
-					}
-				);
+				}
+
+				if(e.categories[1]) truckObj.cuisine = e.categories[1][1];
+				else truckObj.cuisine = e.categories[0][1];
+
+				foodTrucks.push(truckObj);
 				console.log(e);
 			});
 		});

@@ -19,23 +19,22 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 	$scope.truckMarkers = [];
 	$scope.loading = true;
 	$scope.currentMarker = null;
+	$scope.cuisines = [];
 
 	var windowOptions = {
 	     show: false
 	 }
 	    
 
-  // $scope.closeClick= function(){
-  //     $scope.windowOptions.show = false;
-  // };
-
-
 	var newyork = {latitude: 40.69847032728747, longitude:-73.9514422416687};
 	var userLocation;
 
 	$scope.renderTrucks = function(truckArr){
 		truckArr.forEach(function(truck, index){
+			console.log(truck.cuisine)
+			$scope.cuisines.push(truck.cuisine);
 			$scope.truckMarkers.push(MapFactory.makeMarker(truck, index));
+			
 		});
 	};
 
@@ -82,5 +81,6 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 
 	$scope.initialize();
 	$scope.renderTrucks($scope.trucks);
+	console.log($scope.cuisines);
  
 });

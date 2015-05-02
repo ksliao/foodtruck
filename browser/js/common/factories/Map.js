@@ -24,3 +24,31 @@ app.factory('MapFactory', function($http){
 		}
 	};
 });
+
+app.factory('GeoFactory', function($q){
+	    
+	    var userLocation = {};
+
+	    userLocation.getGeo = function (){
+        return $q(function (resolve, reject){
+          if (userLocation.latitude && userLocation.longitude) {
+            resolve();
+          }
+          else {
+            if(navigator.geolocation){                          
+              navigator.geolocation.getCurrentPosition(function (position){
+                userLocation.latitude = position.coords.latitude;
+                userLocation.longitude = position.coords.longitude;
+                resolve();
+              });
+            } 
+            else {
+              console.log("Geolocation is not supported by this browser");
+              reject();
+            }
+          }
+        });
+      };
+
+      return userLocation;
+  });

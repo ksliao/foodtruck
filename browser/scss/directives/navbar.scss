@@ -1,16 +1,16 @@
 navbar {
 
   display: block;
-  background: #a1a1a1;
+  background: #252222;
+  color: #148dfa;
+  margin-bottom: 0;
 
-  fullstack-logo {
-    padding-top: 10px;
-    margin-right: 20px;
-    width: 30px;
+  .navbar{
+    margin-bottom: 0;
   }
 
   a {
-    color: white;
+    color: #74C2E1;
     &:hover {
       color: white;
     }
@@ -19,14 +19,19 @@ navbar {
   .nav > li > a {
     cursor: pointer;
     &.active {
-      color: #f30046;
+      color: white;
     }
     &:hover {
-      transition: color 0.2s;
+      color: white;
+      background: #252222;
+      outline: none;
+      text-decoration: none;
     }
     &:focus {
-      color: #f30046;
-      background: transparent;
+      color: white;
+      background: #252222;
+      outline: none;
+      text-decoration: none;
     }
   }
 
@@ -42,9 +47,12 @@ navbar {
       color: white;
     }
     a {
-      color: #f30046;
+      color: #148dfa;;
       cursor: pointer;
     }
   }
 
+  .fa-truck{
+    font-size: 20px;
+  }
 }

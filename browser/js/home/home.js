@@ -26,7 +26,10 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 	 }
 	    
 
+
 	var newyork = {latitude: 40.69847032728747, longitude:-73.9514422416687};
+
+
 	var userLocation;
 
 	$scope.renderTrucks = function(truckArr){
@@ -45,7 +48,7 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 		    navigator.geolocation.getCurrentPosition(function(position) {
 		    $scope.loading = false;
 		     userLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-		    $scope.map = {center: newyork, zoom:17};
+		    $scope.map = {center: newyork, zoom:13};
 		    $scope.options = {scrollwheel: false};
 		    $scope.coordsUpdates=0;
 		    $scope.dynamicMoveCtr = 0;

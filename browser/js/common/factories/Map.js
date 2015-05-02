@@ -6,6 +6,12 @@ app.factory('MapFactory', function($http){
 				return response.data;
 			});
 		},
+
+		getFilteredTrucks: function(){
+			return $http.get('/api/yelp/filter').then(function(response){
+				return response.data;
+			});
+		},
 		makeMarker: function(truck, id){
 			var marker= {
 				id: id,

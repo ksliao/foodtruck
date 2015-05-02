@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
 
 	for(var i = 0; i <= 7; i ++){
 		var thisPromise = new Promise(function(resolve, reject){
-			yelp.search({term: "food", category_filter:"foodtrucks", offset: 20 * i, location: "nyc" }, function(error, data) {
+			yelp.search({term: "food", category_filter:"foodtrucks", offset: 20 * i, location: "nyc"}, function(error, data) {
 				if(error) reject(error);
 				else resolve(data);
 			});
@@ -45,14 +45,14 @@ router.get('/', function(req, res, next) {
 					coordinates: e.location.coordinate,
 					 name: e.name, 
 					 rating: e.rating_img_url,
-					 review: e.snippet_text,
+					 review: e.snippet_text
 				}
 
 				if(e.categories[1]) truckObj.cuisine = e.categories[1][1];
 				else truckObj.cuisine = e.categories[0][1];
 
 				foodTrucks.push(truckObj);
-				console.log(e);
+				
 			});
 		});
 		res.json(foodTrucks);
@@ -60,4 +60,25 @@ router.get('/', function(req, res, next) {
 	
  
 });
+
+router.get('/filter', function(req, res, next) {
+	var foodTrucks = [];
+	var truckObj = {};
+
+
+yelp.search({term: "food", category_filter:"foodtrucks", location: "nyc", radius_filter:1000 }, function(error, data, next) {
+		if(error) return next(error);
+		data.businesses.forEach(function(e){
+			truckObj = {
+				coordinates: e.location.coordinate,
+					 name: e.name, 
+					 rating: e.rating_img_url,
+					 review: e.snippet_text
+			};
+			foodTrucks.push(truckObj);
+		});
+		res.json(foodTrucks);
+	});
+
+	});
 

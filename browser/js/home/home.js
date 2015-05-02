@@ -37,7 +37,6 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 			console.log(truck.cuisine)
 			$scope.cuisines.push(truck.cuisine);
 			$scope.truckMarkers.push(MapFactory.makeMarker(truck, index));
-			
 		});
 	};
 

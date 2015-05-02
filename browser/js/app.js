@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('FullstackGeneratedApp', [
+var app = angular.module('FoodTruckApp', [
     'ui.router', 
     'uiGmapgoogle-maps',
     'ui.map',

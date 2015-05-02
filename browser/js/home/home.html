@@ -6,11 +6,13 @@
 
     <div ng-repeat='truck in truckMarkers'>
         <ui-gmap-marker coords= "truck.coords" options='truck.options' idkey='truck.id' click='onClick(truck)'models="truckMarkers">
-        <ui-gmap-window model='truck' coords="truck.coords" show="windowOptions.show" closeClick="closeClick()" ><div>
-        {{truck.title}}</br>
-        <img ng-src='{{truck.rating}}'></img>
-        {{truck.cuisine}}
-    </div></ui-gmap-window>    
+            <ui-gmap-window model='truck' coords="truck.coords" show="windowOptions.show" closeClick="closeClick()">
+                <div class="window">
+                    <h4>{{truck.title}}</h4>
+                    <img ng-src='{{truck.rating}}'></img>
+                    {{truck.cuisine}}
+                </div>
+            </ui-gmap-window>    
         </ui-gmap-marker> 
     </div>
 

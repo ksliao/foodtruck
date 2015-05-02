@@ -16,6 +16,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.user = null;
 
+            scope.showAllTrucks = function(){
+                $rootScope.$emit('showAllTrucks');
+            };
+
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
             };

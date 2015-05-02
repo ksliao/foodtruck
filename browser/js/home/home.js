@@ -6,26 +6,37 @@ app.config(function ($stateProvider) {
         controller: 'HomeCtrl',
         resolve: {
         	trucks: function(MapFactory){
-        		return MapFactory.getTrucks();
+        		return MapFactory.getFilteredTrucks();
         	}
         }
     });
 });
 
 
-app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
+app.controller('HomeCtrl', function($scope, $rootScope, $timeout, $log, trucks, MapFactory){
 	$scope.trucks = trucks;
-	console.log($scope.trucks[0]);
 	$scope.truckMarkers = [];
 	$scope.loading = true;
 	$scope.currentMarker = null;
 	$scope.cuisines = [];
 
+
+
+
 	var windowOptions = {
 	     show: false
 	 }
 	    
+	 $scope.nycAll = function(){
+	 	MapFactory.getTrucks()
+	 	.then(function(trucks){
+	 		$scope.trucks = trucks;
+	 		$scope.renderTrucks($scope.trucks);
 
+	 	})
+	 };
+
+	  $rootScope.$on('showAllTrucks', $scope.nycAll);
 
 	var newyork = {latitude: 40.69847032728747, longitude:-73.9514422416687};
 
@@ -34,7 +45,6 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 
 	$scope.renderTrucks = function(truckArr){
 		truckArr.forEach(function(truck, index){
-			console.log(truck.cuisine)
 			$scope.cuisines.push(truck.cuisine);
 			$scope.truckMarkers.push(MapFactory.makeMarker(truck, index));
 		});
@@ -83,6 +93,5 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory){
 
 	$scope.initialize();
 	$scope.renderTrucks($scope.trucks);
-	console.log($scope.cuisines);
  
 });

@@ -12,7 +12,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('SignUpCtrl', function($scope, coords, TruckFactory){
+app.controller('SignUpCtrl', function($scope, coords, TruckFactory, Socket){
 
     console.log(coords);
 
@@ -26,7 +26,7 @@ app.controller('SignUpCtrl', function($scope, coords, TruckFactory){
 
     $scope.createTruck = function(){
         TruckFactory.newTruck($scope.truck).then(function(truck){
-            console.log(truck);
+            Socket.emit('newTruck', truck);
         });
     }
 

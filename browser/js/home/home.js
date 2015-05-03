@@ -13,15 +13,12 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('HomeCtrl', function($scope, $rootScope, $timeout, $log, trucks, MapFactory){
+app.controller('HomeCtrl', function($scope, $rootScope, $timeout, $log, trucks, MapFactory, Socket){
 	$scope.trucks = trucks;
 	$scope.truckMarkers = [];
 	$scope.loading = true;
 	$scope.currentMarker = null;
 	$scope.cuisines = [];
-
-
-
 
 	var windowOptions = {
 	     show: false
@@ -36,7 +33,15 @@ app.controller('HomeCtrl', function($scope, $rootScope, $timeout, $log, trucks, 
 	 	})
 	 };
 
-	  $rootScope.$on('showAllTrucks', $scope.nycAll);
+
+	$rootScope.$on('showAllTrucks', $scope.nycAll);
+
+	Socket.on('addedTruck', function(truck){
+		console.log(truck);
+		$scope.trucks.push(truck.truck);
+		$rootScope.$apply(Socket, $scope.renderTrucks($scope.trucks));
+	});
+
 
 	var newyork = {latitude: 40.69847032728747, longitude:-73.9514422416687};
 

@@ -14,7 +14,7 @@ app.config(function ($stateProvider) {
 
 
 
-app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory, GeoFactory, uiGmapGoogleMapApi){
+app.controller('HomeCtrl', function($scope, $timeout, $log, $rootScope, trucks, MapFactory, GeoFactory, uiGmapGoogleMapApi){
 
 	$scope.trucks = trucks;
 	$scope.truckMarkers = [];
@@ -52,7 +52,6 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory, 
             uiGmapGoogleMapApi.then(function (maps){
             var initialLocation = {latitude: GeoFactory.latitude, longitude: GeoFactory.longitude};
             var userLocation = {latitude: GeoFactory.latitude, longitude: GeoFactory.longitude};
-              //$scope.maps = maps;
               $scope.map = { 
                 center: initialLocation, 
                 zoom: 17,
@@ -65,7 +64,8 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, trucks, MapFactory, 
 
 	$scope.renderTrucks($scope.trucks);
 
-	// $scope.mc = new MarkerClusterer($scope.map, $scope.truckMarkers, {gridSize: 50, maxZoom: 10});
-	// console.log($scope.mc);
+	// $scope.clusterOptions = {minimumClusterSize: 5};
+	// $scope.mc = new MarkerClusterer($scope.map, $scope.truckMarkers, {gridSize: 10, maxZoom: 10});
+	
  
 });

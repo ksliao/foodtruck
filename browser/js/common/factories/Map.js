@@ -21,7 +21,10 @@ app.factory('MapFactory', function($http){
 				title: truck.name,
 				rating: truck.rating,
 				review: truck.review,
-				cuisine: truck.cuisine
+				cuisine: truck.cuisine,
+				doCluster: true,
+				clusterOptions: {gridSize: 50, maxZoom: 10},
+				icon: '/img/truck.png'
 			}
 			marker.onClick = function(){
 				marker.show = !marker.show;

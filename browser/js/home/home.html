@@ -5,7 +5,7 @@
         </ui-gmap-marker>
 
     <div ng-repeat='truck in truckMarkers'>
-        <ui-gmap-marker coords= "truck.coords" options='truck.options' idkey='truck.id' click='onClick(truck)'models="truckMarkers">
+        <ui-gmap-marker coords= "truck.coords" options='truck.options' idkey='truck.id' click='onClick(truck)'models="truckMarkers" doCluster='true' clusterOptions="clusterOptions" icon="truck.icon">
             <ui-gmap-window model='truck' coords="truck.coords" show="windowOptions.show" closeClick="closeClick()">
                 <div class="window">
                     <h4>{{truck.title}}</h4>

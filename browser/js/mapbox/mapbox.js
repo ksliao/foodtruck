@@ -13,9 +13,22 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('MapBoxController', function($scope, trucks, $http){
+app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, MapFactory){
 
 
+    $scope.getAllTrucks = function(){
+        MapFactory.getTrucks()
+            .then(function(trucks){
+                $scope.markers = $scope.formatMarkers(trucks);
+            })
+    };
+
+    $scope.nearByTrucks = function(){
+        $scope.markers = $scope.formatMarkers(trucks);
+    }
+
+    $rootScope.$on('showAllTrucks', $scope.getAllTrucks);
+    $rootScope.$on('limitTrucks', $scope.nearByTrucks);
 
 
     $scope.formatMarkers = function(arr){
@@ -26,9 +39,12 @@ app.controller('MapBoxController', function($scope, trucks, $http){
 
         return arr.map(function(truck){
             return {
+                layer: 'realworld',
+                group: 'nyc',
                 lat: truck.coordinates.latitude,
                 lng: truck.coordinates.longitude,
                 message: truck.name
+
             }
         });
     };
@@ -39,6 +55,16 @@ app.controller('MapBoxController', function($scope, trucks, $http){
             center: {
                 autoDiscover: true,
                 zoom: 50
+            },
+            events: {
+                map: {
+                    enable: ['moveend', 'popupopen'],
+                    logic: 'emit'
+                },
+                marker: {
+                    enable: [],
+                    logic: 'emit'
+                }
             },
             layers: {
                 baselayers: {
@@ -55,8 +81,16 @@ app.controller('MapBoxController', function($scope, trucks, $http){
                         name: 'OpenStreetMap',
                         url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                         type: 'xyz'
+                    },
+                    overlays: {
+                        realworld: {
+                            name: "Real world data",
+                            type: "markercluster",
+                            visible: true
+                        }
                     }
                 }
+
             }
 
         });

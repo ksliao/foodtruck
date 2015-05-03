@@ -21,7 +21,8 @@ app.factory('MapFactory', function($http){
 				title: truck.name,
 				rating: truck.rating,
 				review: truck.review,
-				cuisine: truck.cuisine
+				cuisine: truck.cuisine,
+				icon: '/truck.png'
 			}
 			marker.onClick = function(){
 				marker.show = !marker.show;
@@ -30,3 +31,31 @@ app.factory('MapFactory', function($http){
 		}
 	};
 });
+
+app.factory('GeoFactory', function($q){
+	    
+	    var userLocation = {};
+
+	    userLocation.getGeo = function (){
+        return $q(function (resolve, reject){
+          if (userLocation.latitude && userLocation.longitude) {
+            resolve();
+          }
+          else {
+            if(navigator.geolocation){                          
+              navigator.geolocation.getCurrentPosition(function (position){
+                userLocation.latitude = position.coords.latitude;
+                userLocation.longitude = position.coords.longitude;
+                resolve();
+              });
+            } 
+            else {
+              console.log("Geolocation is not supported by this browser");
+              reject();
+            }
+          }
+        });
+      };
+
+      return userLocation;
+  });

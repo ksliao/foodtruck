@@ -22,7 +22,7 @@ app.factory('MapFactory', function($http){
 				rating: truck.rating,
 				review: truck.review,
 				cuisine: truck.cuisine,
-				icon: '/truck.png'
+				icon: 'truck.png'
 			}
 			marker.onClick = function(){
 				marker.show = !marker.show;

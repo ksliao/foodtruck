@@ -1,7 +1,7 @@
 'use strict';
 app.config(function ($stateProvider) {
     $stateProvider.state('home', {
-        url: '/',
+        url: '/home',
         templateUrl: 'js/home/home.html',
         controller: 'HomeCtrl',
         resolve: {

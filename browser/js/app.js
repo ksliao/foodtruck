@@ -3,7 +3,8 @@ var app = angular.module('FoodTruckApp', [
     'ui.router', 
     'uiGmapgoogle-maps',
     'ui.map',
-    'fsaPreBuilt'
+    'fsaPreBuilt',
+    'leaflet-directive'
     ]);
 
 app.config(function ($urlRouterProvider, $locationProvider) {

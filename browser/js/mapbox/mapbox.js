@@ -40,7 +40,6 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
         return arr.map(function(truck){
             return {
                 layer: 'realworld',
-                group: 'nyc',
                 lat: truck.coordinates.latitude,
                 lng: truck.coordinates.longitude,
                 message: truck.name
@@ -77,17 +76,13 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                             mapid: 'bufanuvols.lia22g09'
                         }
                     },
-                    osm: {
-                        name: 'OpenStreetMap',
-                        url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        type: 'xyz'
-                    },
-                    overlays: {
-                        realworld: {
-                            name: "Real world data",
-                            type: "markercluster",
-                            visible: true
-                        }
+
+                },
+                overlays: {
+                    realworld: {
+                        name: "Real world data",
+                        type: "markercluster",
+                        visible: true
                     }
                 }
 

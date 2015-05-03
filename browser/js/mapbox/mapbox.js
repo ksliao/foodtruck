@@ -15,6 +15,9 @@ app.config(function ($stateProvider) {
 
 app.controller('MapBoxController', function($scope, trucks, $http){
 
+
+
+
     $scope.formatMarkers = function(arr){
 
         _.remove(arr, function(elem){
@@ -24,7 +27,8 @@ app.controller('MapBoxController', function($scope, trucks, $http){
         return arr.map(function(truck){
             return {
                 lat: truck.coordinates.latitude,
-                lng: truck.coordinates.longitude
+                lng: truck.coordinates.longitude,
+                message: truck.name
             }
         });
     };
@@ -33,7 +37,8 @@ app.controller('MapBoxController', function($scope, trucks, $http){
 
     angular.extend($scope, {
             center: {
-                autoDiscover: true
+                autoDiscover: true,
+                zoom: 50
             },
             layers: {
                 baselayers: {

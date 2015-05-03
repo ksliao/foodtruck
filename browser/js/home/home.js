@@ -56,7 +56,7 @@ app.controller('HomeCtrl', function($scope, $timeout, $log, $rootScope, trucks, 
                 center: initialLocation, 
                 zoom: 17,
               };
-              $scope.marker = {id: 0, coords: userLocation, options: {draggable: false}};
+              $scope.marker = {id: 0, coords: userLocation, options: {draggable: false}, icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'};
             })
           }
         });

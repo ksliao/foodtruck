@@ -22,9 +22,7 @@ app.factory('MapFactory', function($http){
 				rating: truck.rating,
 				review: truck.review,
 				cuisine: truck.cuisine,
-				doCluster: true,
-				clusterOptions: {gridSize: 50, maxZoom: 10},
-				icon: '/img/truck.png'
+				icon: '/truck.png'
 			}
 			marker.onClick = function(){
 				marker.show = !marker.show;

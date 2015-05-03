@@ -1,16 +1,24 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var validator = require('validator');
 
 var schema = new mongoose.Schema({
     email: {
-        type: String
+        type: String,
+        validate: [validator.isEmail, 'invalid email']
     },
     password: {
         type: String
     },
     salt: {
         type: String
+    },
+    name: {type: String, required: true},
+    cuisine: String,
+    coordinates: {
+        latitude: {type: Number, required: true},
+        longitude: {type: Number, required: true}
     },
     twitter: {
         id: String,

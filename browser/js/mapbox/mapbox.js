@@ -19,18 +19,21 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
     GeoFactory.getGeo().then(function (){ 
           if (GeoFactory.latitude && GeoFactory.longitude){
             $scope.userMarker = {
-                lat: GeoFactory.latitude, 
-                lng: GeoFactory.longitude, 
+                lat: GeoFactory.latitude,
+                lng: GeoFactory.longitude,
                 title: "User",
                 focus: true,
                 draggable: false,
-                label: {
-                    message: "Me!",
-                    options: {
-                        noHide: true
-                    }
-                },
-                icon:{
+                message: "Me!",
+                // label: {
+                //     message: "Me!",
+                //     options: {
+                //         noHide: true
+                //     },
+                // },
+                icon: {
+                    type: 'awesomeMarker',
+                    icon: 'cog',
                     markerColor: 'red'
                 }
             };
@@ -61,12 +64,14 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
 
         return arr.map(function(truck){
             return {
-                layer: 'realworld',
+                layer: 'truckCluster',
                 lat: truck.coordinates.latitude,
                 lng: truck.coordinates.longitude,
-                message: truck.name
-
-            }
+                message: truck.cuisine,
+                 label: {
+                    message: truck.name
+                    }
+                }
         });
     };
 
@@ -76,7 +81,10 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
     angular.extend($scope, {
             center: {
                 autoDiscover: true,
-                zoom: 10
+                zoom: 20
+            },
+            userIcon:{
+                markerColor: 'red'
             },
             events: {
                 map: {
@@ -102,8 +110,8 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
 
                 },
                 overlays: {
-                    realworld: {
-                        name: "Real world data",
+                    truckCluster: {
+                        name: "truck cluster",
                         type: "markercluster",
                         visible: true
                     }

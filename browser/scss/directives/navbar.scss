@@ -1,35 +1,34 @@
 navbar {
 
   display: block;
+  position: fixed;
+  top: 0;
   background: #252222;
-  color: #148dfa;
-  margin-bottom: 0;
+  border-bottom: 1px solid white;
+  width: 100%;
+  z-index: 1000;
+  opacity: 0.8;
 
   .navbar{
     margin-bottom: 0;
   }
 
-  a {
-    color: #74C2E1;
-    &:hover {
-      color: white;
-    }
-  }
-
   .nav > li > a {
+    color: white;
+    opacity: 1;
     cursor: pointer;
     &.active {
-      color: white;
+      color: #ffd600;
     }
     &:hover {
-      color: white;
-      background: #252222;
+      color: #ffd600;
+      background: none;
       outline: none;
       text-decoration: none;
     }
     &:focus {
-      color: white;
-      background: #252222;
+      color: #ffd600;
+      background: none;
       outline: none;
       text-decoration: none;
     }
@@ -38,6 +37,11 @@ navbar {
   .login-button {
     float: right;
     margin-top: 8px;
+    color: white;
+    border: none;
+    &:hover {
+      color: #ffd600;
+    }
   }
 
   .welcome {
@@ -47,7 +51,7 @@ navbar {
       color: white;
     }
     a {
-      color: #148dfa;;
+      color: white;
       cursor: pointer;
     }
   }
@@ -56,3 +60,5 @@ navbar {
     font-size: 20px;
   }
 }
+
+

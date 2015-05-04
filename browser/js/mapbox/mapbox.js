@@ -25,12 +25,6 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                 focus: true,
                 draggable: false,
                 message: "Me!",
-                // label: {
-                //     message: "Me!",
-                //     options: {
-                //         noHide: true
-                //     },
-                // },
                 icon: {
                     type: 'awesomeMarker',
                     icon: 'cog',
@@ -67,7 +61,7 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                 layer: 'truckCluster',
                 lat: truck.coordinates.latitude,
                 lng: truck.coordinates.longitude,
-                message: truck.cuisine,
+                message: truck.name+'</br><img ng-src='+truck.rating+'></img>',
                  label: {
                     message: truck.name
                     }
@@ -107,6 +101,15 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                             mapid: 'bufanuvols.lia22g09'
                         }
                     },
+                    mapbox_color: {
+                        name: "Mapbox Color",
+                        url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q',
+                            mapid: 'mapbox.run-bike-hike'
+                        }
+                    }
 
                 },
                 overlays: {

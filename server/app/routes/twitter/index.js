@@ -14,7 +14,7 @@ var client = new Twitter({
     access_token_secret: 'I28jMHZNe6LhxVc3hHLUnzD509wrGZSpaQ8wMOyEI7KKo'
 });
 
-client.stream('statuses/filter', {follow: "14914299"}, function(stream){
+client.stream('statuses/filter', {follow: '3222728733'}, function(stream){
 
    stream.on('data', function(tweet){
        var io = require('../../../io')();
@@ -25,7 +25,7 @@ client.stream('statuses/filter', {follow: "14914299"}, function(stream){
 
     stream.on('error', function(error){
         console.log(error);
-    })
+    });
 
 });
 

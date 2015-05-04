@@ -1,2 +1,13 @@
+<div id="container">
 
 <leaflet center="center" markers="markers" layers="layers"  event-broadcast="events" width="100%" height="100vh"></leaflet>
+
+<div id="panel">
+	<h4>Tweets</h4>
+	<div ng-repeat="tweet in tweetArray">
+		<p>{{tweet}}</p>
+	</div>
+</div>
+
+
+</div>

@@ -18,6 +18,8 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
     $scope.tweetArray = [];
 
     Socket.on('newTweet', function(tweet){
+        console.log("tweet", tweet);
+        if(!tweet) return;
        $scope.tweetArray.push(tweet);
         if($scope.tweetArray.length > 5){
             $scope.tweetArray.shift();
@@ -65,6 +67,11 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
 
     $rootScope.$on('showAllTrucks', $scope.getAllTrucks);
     $rootScope.$on('limitTrucks', $scope.nearByTrucks);
+
+
+    $scope.getTweets = function(){
+        console.log('hi');
+    };
 
 
     $scope.formatMarkers = function(arr){

@@ -3,7 +3,6 @@
 var express = require('express');
 var path = require('path');
 var Promise = require('bluebird');
-// var request = Promise.promisify(require('request'));
 var router = express.Router();
 
 var Twitter = require('twitter');
@@ -16,8 +15,12 @@ var client = new Twitter({
 });
 
 client.stream('statuses/filter', {follow: "14914299"}, function(stream){
+
    stream.on('data', function(tweet){
+       var io = require('../../../io')();
        console.log(tweet.text);
+       io.sockets.emit('newTweet', tweet.text);
+
    });
 
     stream.on('error', function(error){

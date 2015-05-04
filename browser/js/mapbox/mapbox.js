@@ -6,14 +6,14 @@ app.config(function ($stateProvider) {
         controller: 'MapBoxController',
         resolve: {
             trucks: function(MapFactory){
-                return MapFactory.getFilteredTrucks();
+                return MapFactory.getTrucks();
             }
         }
     });
 });
 
 
-app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, MapFactory, GeoFactory){
+app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, MapFactory, GeoFactory, Socket){
 
 
     GeoFactory.getGeo().then(function (){ 
@@ -22,7 +22,6 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                 lat: GeoFactory.latitude,
                 lng: GeoFactory.longitude,
                 title: "User",
-                focus: true,
                 draggable: false,
                 message: "Me!",
                 icon: {
@@ -35,15 +34,22 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
           }
         });
 
+    Socket.on('addedTruck', function(truck){
+        console.log(truck);
+        trucks.push(truck.truck);
+        $scope.markers = $scope.formatMarkers(trucks);
+        //$rootScope.$apply(Socket, $scope.renderTrucks($scope.trucks));
+    });
+
     $scope.getAllTrucks = function(){
-        MapFactory.getTrucks()
-            .then(function(trucks){
-                $scope.markers = $scope.formatMarkers(trucks);
-            })
+        $scope.markers = $scope.formatMarkers(trucks);
     };
 
     $scope.nearByTrucks = function(){
-        $scope.markers = $scope.formatMarkers(trucks);
+        MapFactory.getFilteredTrucks()
+            .then(function(trucks){
+                $scope.markers = $scope.formatMarkers(trucks);
+            });
     }
 
     $rootScope.$on('showAllTrucks', $scope.getAllTrucks);

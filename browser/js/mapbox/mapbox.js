@@ -15,6 +15,14 @@ app.config(function ($stateProvider) {
 
 app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, MapFactory, GeoFactory, Socket){
 
+    $scope.tweetArray = [];
+
+    Socket.on('newTweet', function(tweet){
+       $scope.tweetArray.push(tweet);
+        if($scope.tweetArray.length > 5){
+            $scope.tweetArray.shift();
+        }
+    });
 
     GeoFactory.getGeo().then(function (){ 
           if (GeoFactory.latitude && GeoFactory.longitude){

@@ -9,7 +9,7 @@
             <li><a ng-click="showAllTrucks()">Show All</a></li>
             
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <a ng-show="!user" ui-sref="login" class="btn login-button">Login</a>
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>

@@ -19,18 +19,15 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
     GeoFactory.getGeo().then(function (){ 
           if (GeoFactory.latitude && GeoFactory.longitude){
             $scope.userMarker = {
-                lat: GeoFactory.latitude, 
-                lng: GeoFactory.longitude, 
+                lat: GeoFactory.latitude,
+                lng: GeoFactory.longitude,
                 title: "User",
                 focus: true,
                 draggable: false,
-                label: {
-                    message: "Me!",
-                    options: {
-                        noHide: true
-                    }
-                },
-                icon:{
+                message: "Me!",
+                icon: {
+                    type: 'awesomeMarker',
+                    icon: 'cog',
                     markerColor: 'red'
                 }
             };
@@ -61,12 +58,14 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
 
         return arr.map(function(truck){
             return {
-                layer: 'realworld',
+                layer: 'truckCluster',
                 lat: truck.coordinates.latitude,
                 lng: truck.coordinates.longitude,
-                message: truck.name
-
-            }
+                message: truck.name+'</br><img ng-src='+truck.rating+'></img>',
+                 label: {
+                    message: truck.name
+                    }
+                }
         });
     };
 
@@ -76,7 +75,10 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
     angular.extend($scope, {
             center: {
                 autoDiscover: true,
-                zoom: 10
+                zoom: 20
+            },
+            userIcon:{
+                markerColor: 'red'
             },
             events: {
                 map: {
@@ -91,7 +93,7 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
             layers: {
                 baselayers: {
                     mapbox_light: {
-                        name: 'Mapbox Light',
+                        name: 'Map - Light',
                         url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
                         type: 'xyz',
                         layerOptions: {
@@ -99,11 +101,29 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                             mapid: 'bufanuvols.lia22g09'
                         }
                     },
+                    mapbox_color: {
+                        name: "Map - Color",
+                        url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q',
+                            mapid: 'mapbox.run-bike-hike'
+                        }
+                    },
+                    mapbox_street: {
+                        name: "Map - Street",
+                        url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q',
+                            mapid: 'mapbox.streets-basic'
+                        }
+                    }
 
                 },
                 overlays: {
-                    realworld: {
-                        name: "Real world data",
+                    truckCluster: {
+                        name: "truck cluster",
                         type: "markercluster",
                         visible: true
                     }

@@ -93,7 +93,7 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
             layers: {
                 baselayers: {
                     mapbox_light: {
-                        name: 'Mapbox Light',
+                        name: 'Map - Light',
                         url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
                         type: 'xyz',
                         layerOptions: {
@@ -102,12 +102,21 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                         }
                     },
                     mapbox_color: {
-                        name: "Mapbox Color",
+                        name: "Map - Color",
                         url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
                         type: 'xyz',
                         layerOptions: {
                             apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q',
                             mapid: 'mapbox.run-bike-hike'
+                        }
+                    },
+                    mapbox_street: {
+                        name: "Map - Street",
+                        url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
+                        type: 'xyz',
+                        layerOptions: {
+                            apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q',
+                            mapid: 'mapbox.streets-basic'
                         }
                     }
 

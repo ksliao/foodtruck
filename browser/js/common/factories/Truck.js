@@ -17,6 +17,11 @@ app.factory('TruckFactory', function($http, $q){
             return $http.post('/api/user/', truck).then(function(response){
                 return response.data;
             });
+        },
+        allTrucks: function(truck){
+            return $http.get('api/user/').then(function(response){
+               return response.data;
+            });
         }
     }
 });

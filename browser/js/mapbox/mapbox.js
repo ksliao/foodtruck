@@ -13,7 +13,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, MapFactory, GeoFactory){
+app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, MapFactory, GeoFactory, Socket){
 
 
     GeoFactory.getGeo().then(function (){ 
@@ -22,21 +22,20 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                 lat: GeoFactory.latitude, 
                 lng: GeoFactory.longitude, 
                 title: "User",
-                focus: true,
                 draggable: false,
-                label: {
-                    message: "Me!",
-                    options: {
-                        noHide: true
-                    }
-                },
-                icon:{
-                    markerColor: 'red'
-                }
+                message: "Me!",
+                markerColor: 'black'
             };
             $scope.markers.push($scope.userMarker);
           }
         });
+
+    Socket.on('addedTruck', function(truck){
+        console.log(truck);
+        trucks.push(truck.truck);
+        $scope.markers = $scope.formatMarkers(trucks);
+        //$rootScope.$apply(Socket, $scope.renderTrucks($scope.trucks));
+    });
 
     $scope.getAllTrucks = function(){
         MapFactory.getTrucks()

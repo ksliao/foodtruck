@@ -14,8 +14,10 @@ navbar {
   }
 
   .nav > li > a {
+    font-family: 'Istok Web', sans-serif;
     color: white;
     opacity: 1;
+    float: right;
     cursor: pointer;
     &.active {
       color: #ffd600;
@@ -38,6 +40,7 @@ navbar {
     float: right;
     margin-top: 8px;
     color: white;
+    font-family: 'Istok Web', sans-serif;
     border: none;
     &:hover {
       color: #ffd600;
@@ -52,12 +55,14 @@ navbar {
     }
     a {
       color: white;
+      font-family: 'Istok Web', sans-serif;
       cursor: pointer;
     }
   }
 
   .fa-truck{
     font-size: 20px;
+    float: left;
   }
 }
 

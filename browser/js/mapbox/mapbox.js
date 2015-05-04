@@ -28,6 +28,9 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                     type: 'awesomeMarker',
                     icon: 'cog',
                     markerColor: 'red'
+                },
+                label: {
+                    message: "Me!"
                 }
             };
             $scope.markers.push($scope.userMarker);
@@ -68,7 +71,7 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                 lat: truck.coordinates.latitude,
                 lng: truck.coordinates.longitude,
                 message: truck.name+'</br><img ng-src='+truck.rating+'></img>',
-                 label: {
+                label: {
                     message: truck.name
                     }
                 }
@@ -94,17 +97,6 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                 marker: {
                     enable: [],
                     logic: 'emit'
-                }
-            },
-            directions:{
-                driving:
-                {
-                    url: 'http://api.tiles.mapbox.com/v4/directions/mapbox.driving/{waypoints}.json?access_token={apikey}',
-                    apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q'
-                },
-                walking:{
-                    url: 'http://api.tiles.mapbox.com/v4/directions/mapbox.walking/{waypoints}.json?access_token={apikey}',
-                    apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q'
                 }
             },
             layers: {
@@ -145,6 +137,20 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                         visible: true
                     }
                 }
+            //     directions:{
+            //     driving:{
+            //         name: 'Driving Directions',
+            //         type: 'directions',
+            //         url: 'http://api.tiles.mapbox.com/v4/directions/mapbox.driving/{waypoints}.json?access_token={apikey}',
+            //         apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q'
+            //     },
+            //     walking:{
+            //         name: 'Walking Directions',
+            //         type: 'directions',
+            //         url: 'http://api.tiles.mapbox.com/v4/directions/mapbox.walking/{waypoints}.json?access_token={apikey}',
+            //         apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q'
+            //     }
+            // }
 
             }
 

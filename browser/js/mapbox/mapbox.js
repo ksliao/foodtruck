@@ -20,10 +20,11 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
     Socket.on('newTweet', function(tweet){
         console.log("tweet", tweet);
         if(!tweet) return;
-       $scope.tweetArray.push(tweet);
+       $rootScope.$apply($scope.tweetArray.push(tweet));
         if($scope.tweetArray.length > 5){
             $scope.tweetArray.shift();
         }
+         console.log("tweetArr",$scope.tweetArray);
     });
 
     GeoFactory.getGeo().then(function (){ 
@@ -48,7 +49,6 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
         });
 
     Socket.on('addedTruck', function(truck){
-        console.log(truck);
         trucks.push(truck.truck);
         $scope.markers = $scope.formatMarkers(trucks);
         //$rootScope.$apply(Socket, $scope.renderTrucks($scope.trucks));

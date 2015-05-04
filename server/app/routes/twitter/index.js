@@ -14,18 +14,22 @@ var client = new Twitter({
     access_token_secret: 'I28jMHZNe6LhxVc3hHLUnzD509wrGZSpaQ8wMOyEI7KKo'
 });
 
-client.stream('statuses/filter', {follow: '3222728733'}, function(stream){
+client.stream('statuses/filter', {follow: "3222728733"}, function(stream){
 
    stream.on('data', function(tweet){
        var io = require('../../../io')();
        console.log(tweet.text);
-       io.sockets.emit('newTweet', tweet.text);
+       var tweet = {
+        text: tweet.text,
+        name: tweet.user.name
+       }
+       io.sockets.emit('newTweet', tweet);
 
    });
 
     stream.on('error', function(error){
         console.log(error);
-    });
+    })
 
 });
 

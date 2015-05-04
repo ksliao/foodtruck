@@ -13,8 +13,30 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, MapFactory){
+app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, MapFactory, GeoFactory){
 
+
+    GeoFactory.getGeo().then(function (){ 
+          if (GeoFactory.latitude && GeoFactory.longitude){
+            $scope.userMarker = {
+                lat: GeoFactory.latitude, 
+                lng: GeoFactory.longitude, 
+                title: "User",
+                focus: true,
+                draggable: false,
+                label: {
+                    message: "Me!",
+                    options: {
+                        noHide: true
+                    }
+                },
+                icon:{
+                    markerColor: 'red'
+                }
+            };
+            $scope.markers.push($scope.userMarker);
+          }
+        });
 
     $scope.getAllTrucks = function(){
         MapFactory.getTrucks()
@@ -49,11 +71,12 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
     };
 
     $scope.markers = $scope.formatMarkers(trucks);
+    
 
     angular.extend($scope, {
             center: {
                 autoDiscover: true,
-                zoom: 50
+                zoom: 10
             },
             events: {
                 map: {

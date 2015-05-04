@@ -25,12 +25,12 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                 focus: true,
                 draggable: false,
                 message: "Me!",
-                label: {
-                    message: "Me!",
-                    options: {
-                        noHide: true
-                    },
-                },
+                // label: {
+                //     message: "Me!",
+                //     options: {
+                //         noHide: true
+                //     },
+                // },
                 icon: {
                     type: 'awesomeMarker',
                     icon: 'cog',
@@ -67,8 +67,11 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                 layer: 'truckCluster',
                 lat: truck.coordinates.latitude,
                 lng: truck.coordinates.longitude,
-                message: truck.name
-            }
+                message: truck.cuisine,
+                 label: {
+                    message: truck.name
+                    }
+                }
         });
     };
 

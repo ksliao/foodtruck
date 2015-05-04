@@ -10,7 +10,6 @@ module.exports = function (server) {
 
     io.on('connection', function (socket) {
         socket.on('newTruck', function(truck){
-            console.log('received truck');
             io.sockets.emit('addedTruck', {
                 truck: truck
             });

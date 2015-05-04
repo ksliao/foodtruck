@@ -5,7 +5,6 @@
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
-            <li><a ng-click="limitTrucks()">Around Me</a></li>
             <li><a ng-click="showAllTrucks()">Show All</a></li>
             
         </ul>

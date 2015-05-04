@@ -1,7 +1,7 @@
 <nav class="navbar navbar-static-top">
     <div class="container">
         <ul class="nav navbar-nav">
-            <li><a><i class="fa fa-truck"></i></a></li>
+            <li ui-sref-active="active" ui-sref="map"><a><i class="fa fa-truck"></i></a></li>
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>

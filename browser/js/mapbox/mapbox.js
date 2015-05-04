@@ -96,6 +96,17 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                     logic: 'emit'
                 }
             },
+            directions:{
+                driving:
+                {
+                    url: 'http://api.tiles.mapbox.com/v4/directions/mapbox.driving/{waypoints}.json?access_token={apikey}',
+                    apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q'
+                },
+                walking:{
+                    url: 'http://api.tiles.mapbox.com/v4/directions/mapbox.walking/{waypoints}.json?access_token={apikey}',
+                    apikey: 'pk.eyJ1Ijoia3NsaWFvIiwiYSI6Ik5oWVdkMk0ifQ.qxYkSJPf31GOND3vg6Zq-Q'
+                }
+            },
             layers: {
                 baselayers: {
                     mapbox_light: {

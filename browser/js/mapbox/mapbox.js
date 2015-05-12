@@ -44,12 +44,12 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
                     message: "Me!"
                 }
             };
-            $scope.markers.push($scope.userMarker);
+            $scope.markers.push($scope.userMarker); //QUESTION
           }
         });
 
     Socket.on('addedTruck', function(truck){
-        trucks.push(truck.truck);
+        $rootScope.$apply(trucks.push(truck.truck)); //QUESTION
         $scope.markers = $scope.formatMarkers(trucks);
         //$rootScope.$apply(Socket, $scope.renderTrucks($scope.trucks));
     });
@@ -65,7 +65,7 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
             });
     }
 
-    $rootScope.$on('showAllTrucks', $scope.getAllTrucks);
+    $rootScope.$on('showAllTrucks', $scope.getAllTrucks); //QUESTION
     $rootScope.$on('limitTrucks', $scope.nearByTrucks);
 
 
@@ -76,7 +76,7 @@ app.controller('MapBoxController', function($scope, trucks, $http, $rootScope, M
 
     $scope.formatMarkers = function(arr){
 
-        _.remove(arr, function(elem){
+        _.remove(arr, function(elem){ //QUESTION
             return !elem.coordinates;
         });
 

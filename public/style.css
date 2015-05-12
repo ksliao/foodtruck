@@ -1,0 +1,261 @@
+* {
+  box-sizing: border-box; }
+
+fullstack-logo {
+  display: block; }
+  fullstack-logo img {
+    display: block;
+    width: 100%; }
+
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite; }
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg); } }
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+navbar {
+  display: block;
+  position: fixed;
+  top: 0;
+  background: #252222;
+  border-bottom: 1px solid white;
+  width: 100%;
+  z-index: 1000;
+  opacity: 0.8; }
+  navbar .navbar {
+    margin-bottom: 0; }
+  navbar .nav > li > a {
+    font-family: 'Istok Web', sans-serif;
+    color: white;
+    opacity: 1;
+    float: right;
+    cursor: pointer; }
+    navbar .nav > li > a.active {
+      color: #ffd600; }
+    navbar .nav > li > a:hover {
+      color: #0091ea;
+      background: none;
+      outline: none;
+      text-decoration: none; }
+    navbar .nav > li > a:focus {
+      color: #0091ea;
+      background: none;
+      outline: none;
+      text-decoration: none; }
+  navbar .login-button {
+    float: right;
+    margin-top: 8px;
+    color: white;
+    font-family: 'Istok Web', sans-serif;
+    border: none; }
+    navbar .login-button:hover {
+      color: #0091ea; }
+  navbar .welcome {
+    float: right;
+    margin-top: 12px; }
+    navbar .welcome span {
+      color: white; }
+    navbar .welcome a {
+      color: white;
+      font-family: 'Istok Web', sans-serif;
+      cursor: pointer; }
+  navbar .fa-truck {
+    font-size: 20px;
+    float: left; }
+
+body {
+  background-color: #E4E6E5;
+  text-align: center;
+  font-family: 'Istok Web', sans-serif; }
+
+#home fullstack-logo {
+  padding-top: 30px;
+  width: 150px;
+  margin: 0 auto; }
+#home h1 {
+  margin-top: 40px;
+  text-align: center; }
+
+.angular-google-map-container {
+  height: 100vh; }
+
+.window {
+  padding: 10px; }
+
+iframe {
+  width: 100%;
+  height: 100vh; }
+
+#map {
+  width: 100%;
+  height: 100vh;
+  display: block;
+  float: left; }
+
+#container {
+  width: 100%;
+  height: 100vh;
+  position: relative; }
+
+#panel {
+  top: 50px;
+  right: 0;
+  width: 20%;
+  height: 100vh;
+  background: #0091ea;
+  opacity: 0.8;
+  position: absolute;
+  float: right; }
+
+leaflet {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  float: left;
+  z-index: -1; }
+
+h4 {
+  margin-top: 30px;
+  opacity: 1;
+  color: white; }
+
+#about {
+  padding-bottom: 50px; }
+  #about p {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: justify;
+    font-size: 25px;
+    font-weight: 300; }
+  #about img {
+    display: block;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 50px; }
+
+tutorial-section {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 20px 0 60px 0; }
+  tutorial-section > h1 {
+    margin: 20px 0 40px 0;
+    text-align: center;
+    font-weight: bold; }
+
+tutorial-video {
+  display: block;
+  width: 600px;
+  margin: 0 auto; }
+  tutorial-video h1 {
+    font-weight: 300;
+    font-size: 24px;
+    margin-bottom: 15px; }
+  tutorial-video iframe {
+    width: 600px;
+    height: 400px; }
+
+tutorial-section-menu {
+  display: block; }
+  tutorial-section-menu:after {
+    content: "";
+    display: table;
+    clear: both; }
+  tutorial-section-menu ul {
+    margin-left: 23px;
+    list-style-type: none;
+    font-weight: 300; }
+    tutorial-section-menu ul li {
+      float: left;
+      margin-right: 40px;
+      padding: 10px;
+      cursor: pointer; }
+      tutorial-section-menu ul li:hover {
+        background: #f3f3f3; }
+
+#login-form {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: left;
+  border: 1px solid white;
+  background: black;
+  opacity: 0.8;
+  font-family: 'Istok Web', sans-serif; }
+
+#signup-form {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: left;
+  border: 1px solid white;
+  background: black;
+  opacity: 0.8;
+  font-family: 'Istok Web', sans-serif; }
+
+h1 {
+  color: white;
+  margin-top: 100px;
+  font-family: 'Istok Web', sans-serif;
+  font-weight: 800;
+  font-size: 50px;
+  letter-spacing: 5px; }
+
+h3 {
+  color: #E4E6E5;
+  font-family: 'Istok Web', sans-serif;
+  letter-spacing: 2px; }
+
+#bg {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  background: url(/scss/img/background.jpeg);
+  text-align: center; }
+
+.centerDiv {
+  margin: 0 auto; }
+
+.floatDiv {
+  margin: 0 auto; }
+
+.form-group > label {
+  color: white;
+  opacity: 1; }
+
+input {
+  background: transparent;
+  border: 1px solid white;
+  opacity: 1; }
+
+.btn-default {
+  background: none;
+  color: white; }
